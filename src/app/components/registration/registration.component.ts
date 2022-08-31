@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.css']
+  styleUrls: ['./registration.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class RegistrationComponent implements OnInit {
 
@@ -12,4 +13,8 @@ export class RegistrationComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  cadastrarUsuario() {
+    console.log('Efetuou cadastro usando Event Binding');
+    alert('Efetuou cadastro usando Event Binding');
+  }
 }

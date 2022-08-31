@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  fazerLogin() {
+  validarLogin() {
     console.log('Efetuou login usando Event Binding');
     alert('Efetuou login usando Event Binding');
   }
