@@ -12,6 +12,7 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { BeerRegistrationComponent } from './components/beer-registration/beer-registration.component';
 import { BeerListComponent } from './components/beer-list/beer-list.component';
 import { BeerSummaryComponent } from './components/beer-summary/beer-summary.component';
+import { BeerItemComponent } from './components/beer-item/beer-item.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { BeerSummaryComponent } from './components/beer-summary/beer-summary.com
     RegistrationComponent,
     BeerRegistrationComponent,
     BeerListComponent,
-    BeerSummaryComponent
+    BeerSummaryComponent,
+    BeerItemComponent
   ],
   imports: [
     BrowserModule,

@@ -34,7 +34,7 @@ const routes: Routes = [
     component: BeerSummaryComponent,
   },
   {
-    path: 'beerregistration',
+    path: 'beerregister',
     component: BeerRegistrationComponent,
   }
 ];
