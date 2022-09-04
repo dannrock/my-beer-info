@@ -1,1 +1,69 @@
-<p>beer-registration works!</p>
+<div class="container center">
+  <br />
+  <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 0px 40px 12px 40px; border: 1px solid #EEE;width: 75%;">
+
+    <form class="col s12" method="post">
+      <div class='row'>
+        <div class='col s12'>
+        </div>
+      </div>
+
+      <div class='row'>
+        <div class='input-field col s12'>
+          <input [(ngModel)]="beer.id" disabled hidden type='text' name='id' id='id'/>
+        </div>
+      </div>
+
+      <div class='row'>
+        <div class='input-field col s12'>
+          <input [(ngModel)]="beer.fabricante" class='validate' type='text' name='fabricante' id='fabricante' placeholder="Informe o Fabricante"/>
+        </div>
+      </div>
+
+      <div class='row'>
+        <div class='input-field col s12'>
+          <input [(ngModel)]="beer.marca" class='validate' type='text' name='marca' id='marca' placeholder="Informe a Marca"/>
+        </div>
+      </div>
+
+      <div class='row'>
+        <div class='input-field col s12'>
+          <input [(ngModel)]="beer.familia" class='validate' type='text' name='familia' id='familia' placeholder="Informe a Família"/>
+        </div>
+      </div>
+
+      <div class='row'>
+        <div class='input-field col s12'>
+          <input [(ngModel)]="beer.tipo" class='validate' type='text' name='tipo' id='tipo' placeholder="Informe o Tipo"/>
+        </div>
+      </div>
+
+      <div class='row'>
+        <div class='input-field col s12'>
+          <input [(ngModel)]="beer.teor" class='validate' type='number' name='teor' id='teor' placeholder="Informe o Teor Alcoólico"/>
+        </div>
+      </div>
+
+      <div class='row'>
+        <div class='input-field col s12'>
+          <input [(ngModel)]="beer.ibu" class='validate' type='number' name='ibu' id='ibu' placeholder="Informe o Amargor (IBU)"/>
+        </div>
+      </div>
+
+      <div class='row'>
+        <div class='input-field col s12'>
+          <input [(ngModel)]="beer.cor" class='validate' type='text' name='cor' id='cor' placeholder="Informe a Cor"/>
+        </div>
+      </div>
+
+      <br />
+        <div class='row'>
+          <button (click)="salvar()" type='submit' name='btn_salvar' class='col s4 btn btn-large waves-effect green'>Salvar</button>
+
+          <button type='submit' name='btn_excluir' class='col s4 btn btn-large waves-effect red'>Excluir</button>
+
+          <button type='submit' name='btn_cancelar' class='col s4 btn btn-large waves-effect grey'>Cancelar</button>
+        </div>
+    </form>
+  </div>
+</div>
