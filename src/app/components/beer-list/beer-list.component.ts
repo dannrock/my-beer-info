@@ -1,3 +1,4 @@
+import { BeerService } from './../../services/beer.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 @Component({
@@ -7,10 +8,16 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
   encapsulation: ViewEncapsulation.None
 })
 export class BeerListComponent implements OnInit {
+  beers!: any[];
 
-  constructor() { }
+  constructor(private beerService: BeerService) { }
 
   ngOnInit(): void {
+    this.getListaCerveja();
+  }
+
+  getListaCerveja() {
+    this.beers = this.beerService.getListaCerveja();
   }
 
 }

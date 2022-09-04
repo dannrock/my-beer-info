@@ -7,6 +7,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
   encapsulation: ViewEncapsulation.None
 })
 export class BeerSummaryComponent implements OnInit {
+  totalCervejasCadastro: number = 66;
 
   constructor() { }
 

@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-forgot',
@@ -8,14 +9,16 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class ForgotComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
   }
 
   recuperarSenha() {
-    console.log('Recuperou senha usando Event Binding');
-    alert('Recuperou senha usando Event Binding');
+    this.router.navigate(['/']);
   }
 
 }

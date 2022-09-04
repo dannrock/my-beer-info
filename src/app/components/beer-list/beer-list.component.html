@@ -1,4 +1,6 @@
 <div class='container'>
   <br />
-  <app-beer-item></app-beer-item>
+  <ng-container *ngFor="let beer of beers">
+    <app-beer-item [beer]="beer"></app-beer-item>
+  </ng-container>
 </div>

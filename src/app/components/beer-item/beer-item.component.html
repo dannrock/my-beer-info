@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" (click)="detalhesCerveja(beer.id)">
   <div class="grey lighten-4 div-tracejada row" style="display: flex;">
 
     <div class='col s1'>
@@ -6,15 +6,15 @@
     </div>
 
     <div class='col s10' style="padding-left: 5%;">
-      <b>Fabricante / Marca</b><br />
-      Família / Tipo<br />
-      Teor Alcoólico<br />
-      IBU / Cor
+      <b>Fabricante: </b> {{beer.fabricante}} / <b>Marca: </b> {{beer.marca}}<br />
+      <b>Família: </b> {{beer.familia}} / <b>Tipo: </b> {{beer.tipo}}<br />
+      <b>Teor Alcoólico: </b> {{beer.teor}} <br />
+      <b>IBU: </b> {{beer.ibu}} / <b>Cor: </b> {{beer.cor}}
     </div>
 
     <div class='col s1 center' style="width: auto;">
       <i class="material-icons" style='font-size: 4rem;color: gold;'>star</i>
-      <span><b>5/5</b></span>
+      <span><b>{{beer?.qtdeEstrelas}}/5</b></span>
     </div>
 
   </div>
