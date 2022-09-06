@@ -37,7 +37,10 @@ export class BeerRegistrationComponent implements OnInit {
 
   getCervejaId() {
     const id = this.route.snapshot.queryParams['id'];
-    this.beer = this.beerService.getCervejaId(Number(id));
+
+    if(id != null) {
+      this.beer = this.beerService.getCerveja(Number(id));
+    }
   }
 
 }

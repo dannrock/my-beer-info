@@ -1,3 +1,4 @@
+import { LoginService } from 'src/app/services/login.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -8,16 +9,24 @@ import { ActivatedRoute, Router } from '@angular/router';
   encapsulation: ViewEncapsulation.None
 })
 export class RegistrationComponent implements OnInit {
+  user = {
+    nomeCompleto: null,
+    email: null,
+    senha: null,
+    isLoggedIn: false
+  }
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private loginService: LoginService
   ) { }
 
   ngOnInit(): void {
   }
 
   cadastrarUsuario() {
-    this.router.navigate(['/beersummary']);
+    this.user.isLoggedIn = true;
+    this.loginService.cadastrarUsuario(this.user);
   }
 }

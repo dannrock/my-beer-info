@@ -11,27 +11,24 @@ export class AppComponent implements OnInit {
   title = 'my-beer-info';
 
   isLoggedIn: boolean = false;
-  email!: string | null;
+  nomeCompleto!: string;
 
-  constructor(private loginService: LoginService) {
-
-  }
+  constructor(
+    private loginService: LoginService) {}
 
   ngOnInit(): void {
-    this.getIsLoggedIn();
-    this.getUsuario();
-
-    this.loginService.getSubject().subscribe(isLoggedIn => {
-      this.isLoggedIn = isLoggedIn,
-      this.getUsuario();
+      this.loginService.getLoginState().subscribe(isLogged => {
+      this.isLoggedIn = isLogged,
+      this.getUsuarioLogado();
     })
   }
 
-  getUsuario() {
-    this.email = this.loginService.getUsuario();
+  getUsuarioLogado() {
+    if(this.isLoggedIn) {
+      let user = this.loginService.getUsuarioLogado();
+
+      this.nomeCompleto = user.nomeCompleto;
+    }
   }
 
-  getIsLoggedIn() {
-    this.isLoggedIn = this.loginService.isLoggedIn();
-  }
 }

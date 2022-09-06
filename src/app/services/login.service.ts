@@ -6,31 +6,76 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class LoginService {
-  private loginService = new Subject<boolean>();
+  private isLogged = new Subject<boolean>();
 
   constructor(private router: Router) { }
 
-  getSubject(){
-    return this.loginService;
+  getLoginState(){
+    return this.isLogged;
   }
 
-  isLoggedIn() {
-    return Boolean (localStorage.getItem('isLoggedIn'));
+  getUsuarioLogado() {
+    let usuarios = this.getListaUsuarios();
+
+    let user = usuarios.find((user: any) =>
+      user.isLoggedIn === true);
+
+    if(user != null) {
+      return user;
+    }
   }
 
-  getUsuario() {
-    return localStorage.getItem('usuario');
+  recuperarSenha(email: string) {
+
   }
 
-  fazerLogin(usuario: string) {
-    localStorage.setItem('isLoggedIn', JSON.stringify(true));
-    localStorage.setItem('usuario', usuario);
-    this.loginService.next(true);
+  getListaUsuarios() {
+    let usuarios = JSON.parse(localStorage.getItem('usuarios') as string);
+
+    if(usuarios === null) {
+      usuarios = [];
+    }
+    return usuarios;
+  }
+
+  cadastrarUsuario(user: any) {
+    let usuarios = this.getListaUsuarios();
+    usuarios.push(user)
+    localStorage.setItem('usuarios', JSON.stringify(usuarios));
+
+    this.isLogged.next(true);
+    this.router.navigate(['/beersummary']);
+  }
+
+  fazerLogin(email: string, senha: string) {
+    let usuarios = this.getListaUsuarios();
+
+    let userIndex = usuarios.findIndex((user: any) =>
+      user.email === email &&
+      user.senha === senha);
+
+    if(userIndex != null) {
+      usuarios[userIndex].isLoggedIn = true;
+      localStorage.setItem('usuarios', JSON.stringify(usuarios));
+      this.isLogged.next(true);
+
+      this.router.navigate(['/beersummary']);
+    }
   }
 
   fazerLogout() {
-    localStorage.setItem('isLoggedIn', JSON.stringify(false));
-    this.loginService.next(false);
-    this.router.navigate(['']);
+    let usuarios = this.getListaUsuarios();
+
+    let userIndex = usuarios.findIndex((user: any) =>
+      user.isLoggedIn === true);
+
+    if(userIndex != null) {
+      usuarios[userIndex].isLoggedIn = false;
+      localStorage.setItem('usuarios', JSON.stringify(usuarios));
+      this.isLogged.next(false);
+
+      this.router.navigate(['']);
+    }
   }
+
 }

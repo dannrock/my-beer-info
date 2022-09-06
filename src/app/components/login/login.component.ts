@@ -1,6 +1,5 @@
 import { LoginService } from './../../services/login.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,8 +12,6 @@ export class LoginComponent implements OnInit {
   senha!: string;
 
   constructor(
-    private route: ActivatedRoute,
-    private router: Router,
     private loginService: LoginService
   ) { }
 
@@ -22,10 +19,6 @@ export class LoginComponent implements OnInit {
   }
 
   validarLogin() {
-    this.loginService.fazerLogin(this.email)
-
-    this.router.navigate(['/beersummary']);
+    this.loginService.fazerLogin(this.email, this.senha)
   }
-
-
 }

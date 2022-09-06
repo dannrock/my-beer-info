@@ -17,7 +17,7 @@ export class BeerListComponent implements OnInit {
   }
 
   getListaCerveja() {
-    this.beers = this.beerService.getListaCerveja();
+    this.beers = this.beerService.getListaCervejas();
   }
 
 }

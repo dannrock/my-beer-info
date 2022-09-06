@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { BeerService } from 'src/app/services/beer.service';
 
 @Component({
   selector: 'app-beer-summary',
@@ -7,11 +8,18 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
   encapsulation: ViewEncapsulation.None
 })
 export class BeerSummaryComponent implements OnInit {
-  totalCervejasCadastro: number = 66;
+  qtdCervejas!: number;
 
-  constructor() { }
+  constructor(
+    private beerService: BeerService
+  ) { }
 
   ngOnInit(): void {
+    this.getTotalCervejas();
+  }
+
+  getTotalCervejas() {
+    this.qtdCervejas = this.beerService.getTotalCervejas();
   }
 
 }
