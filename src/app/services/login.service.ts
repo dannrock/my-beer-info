@@ -25,10 +25,6 @@ export class LoginService {
     }
   }
 
-  recuperarSenha(email: string) {
-
-  }
-
   getListaUsuarios() {
     let usuarios = JSON.parse(localStorage.getItem('usuarios') as string);
 
@@ -54,7 +50,7 @@ export class LoginService {
       user.email === email &&
       user.senha === senha);
 
-    if(userIndex != null) {
+    if(userIndex !== -1) {
       usuarios[userIndex].isLoggedIn = true;
       localStorage.setItem('usuarios', JSON.stringify(usuarios));
       this.isLogged.next(true);
@@ -69,7 +65,7 @@ export class LoginService {
     let userIndex = usuarios.findIndex((user: any) =>
       user.isLoggedIn === true);
 
-    if(userIndex != null) {
+    if(userIndex !== -1) {
       usuarios[userIndex].isLoggedIn = false;
       localStorage.setItem('usuarios', JSON.stringify(usuarios));
       this.isLogged.next(false);

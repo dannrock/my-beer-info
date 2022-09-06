@@ -1,6 +1,7 @@
 import { LoginService } from 'src/app/services/login.service';
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-registration',
@@ -9,12 +10,16 @@ import { ActivatedRoute, Router } from '@angular/router';
   encapsulation: ViewEncapsulation.None
 })
 export class RegistrationComponent implements OnInit {
+  @ViewChild('form') form!: NgForm;
+
   user = {
     nomeCompleto: null,
     email: null,
     senha: null,
     isLoggedIn: false
   }
+
+  confirmarSenha!: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -23,6 +28,7 @@ export class RegistrationComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.confirmarSenha = '';
   }
 
   cadastrarUsuario() {

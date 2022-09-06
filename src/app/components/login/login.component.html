@@ -2,7 +2,7 @@
   <br />
   <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 0px 40px 12px 40px; border: 1px solid #EEE;">
 
-    <form class="col s12" method="post">
+    <form #form="ngForm" (ngSubmit)="efetuarLogin()" class="col s12" method="post">
       <div class='row'>
         <div class='col s12'>
         </div>
@@ -10,13 +10,39 @@
 
       <div class='row'>
         <div class='input-field col s12'>
-          <input [(ngModel)]="email" class='validate' type='email' name='email' id='email' placeholder="Digite seu email"/>
+          <div class='input-field col s12'>
+            <input
+              id='input-email'
+              name='input-email'
+              type='email'
+              class='validate'
+              [(ngModel)]="this.email"
+              pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+              #inputemail="ngModel"
+              placeholder="Digite seu Email"
+              required />
+          </div>
+        </div>
+        <div class="red-text" style="font-size: small;" [hidden]="inputemail.valid || inputemail.pristine">
+          E-mail inválido!
         </div>
       </div>
 
       <div class='row'>
         <div class='input-field col s12'>
-          <input [(ngModel)]="senha" class='validate' type='password' name='password' id='password' placeholder="Digite sua senha"/>
+          <input
+              id='input-senha'
+              name='input-senha'
+              type='password'
+              class='validate'
+              [(ngModel)]="this.senha"
+              pattern="^[a-zA-Z0-9_@#\\&\\$]{6,18}$"
+              #inputsenha="ngModel"
+              placeholder="Digite sua senha"
+              required />
+        </div>
+        <div class="red-text" style="font-size: small;" [hidden]="inputsenha.valid || inputsenha.pristine">
+          Senha inválida! (Min. 6 caracteres)
         </div>
       </div>
 
@@ -34,7 +60,13 @@
 
       <br />
         <div class='row'>
-          <button (click)="validarLogin()" type='submit' name='btn_login' class='col s12 btn btn-large waves-effect indigo'>Entrar</button>
+          <button
+            type='submit'
+            name='btn-login'
+            class='col s12 btn btn-large waves-effect indigo'
+            [disabled]="!form.valid">
+            Entrar
+          </button>
         </div>
     </form>
   </div>

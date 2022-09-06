@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BeerService {
 
-  constructor() { }
+  constructor(
+    private router: Router) { }
 
   getListaCervejas() {
     let beers = JSON.parse(localStorage.getItem('beers') as string);
@@ -34,5 +36,17 @@ export class BeerService {
     const beers = this.getListaCervejas();
 
     return beers.length;
+  }
+
+  excluirCerveja(id: number) {
+    let beers = this.getListaCervejas();
+
+    let beerIndex = beers.findIndex((beer: any) => beer.id === id);
+
+    beers.splice(beerIndex, 1);
+
+    localStorage.setItem('beers', JSON.stringify(beers));
+
+    this.router.navigate(['/beerlist']);
   }
 }

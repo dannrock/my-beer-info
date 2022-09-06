@@ -1,5 +1,6 @@
 import { LoginService } from './../../services/login.service';
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -8,17 +9,22 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
   encapsulation: ViewEncapsulation.None
 })
 export class LoginComponent implements OnInit {
-  email!: string;
-  senha!: string;
+  @ViewChild('form') form!: NgForm;
+
+  email!: any;
+  senha!: any;
 
   constructor(
     private loginService: LoginService
   ) { }
 
   ngOnInit(): void {
+    this.email = '';
+    this.senha = '';
   }
 
-  validarLogin() {
+  efetuarLogin() {
     this.loginService.fazerLogin(this.email, this.senha)
+    this.form.reset();
   }
 }
