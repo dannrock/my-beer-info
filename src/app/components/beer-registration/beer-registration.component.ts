@@ -1,6 +1,7 @@
 import { BeerService } from './../../services/beer.service';
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-beer-registration',
@@ -9,6 +10,8 @@ import { ActivatedRoute, Router } from '@angular/router';
   encapsulation: ViewEncapsulation.None
 })
 export class BeerRegistrationComponent implements OnInit {
+  @ViewChild('form') form!: NgForm;
+
   beer = {
     id: Math.floor((Math.random()*1000)+1),
     fabricante: null,
@@ -35,9 +38,27 @@ export class BeerRegistrationComponent implements OnInit {
     this.router.navigate(['/beerlist']);
   }
 
+  cancelar() {
+    this.router.navigate(['/beerlist']);
+  }
+
+  excluir() {
+    const id = this.route.snapshot.queryParams['id'];
+
+    if(id === undefined) {
+      this.form.reset();
+    }
+    else {
+      this.beerService.excluirCerveja(id);
+    }
+  }
+
   getCervejaId() {
     const id = this.route.snapshot.queryParams['id'];
-    this.beer = this.beerService.getCervejaId(Number(id));
+
+    if(id !== undefined) {
+      this.beer = this.beerService.getCerveja(Number(id));
+    }
   }
 
 }

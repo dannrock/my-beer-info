@@ -1,30 +1,52 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BeerService {
 
-  constructor() { }
+  constructor(
+    private router: Router) { }
 
-  registrarCerveja(beer: any) {
-    let beers = this.getListaCerveja();
+  getListaCervejas() {
+    let beers = JSON.parse(localStorage.getItem('beers') as string);
+
     if(beers === null) {
       beers = [];
     }
+    return beers;
+  }
+
+  registrarCerveja(beer: any) {
+    let beers = this.getListaCervejas();
 
     beers.push(beer);
 
     localStorage.setItem('beers', JSON.stringify(beers));
   }
 
-  getListaCerveja() {
-    return JSON.parse(localStorage.getItem('beers') as string);
-  }
-
-  getCervejaId(id: number) {
-    const beers = this.getListaCerveja();
+  getCerveja(id: number) {
+    const beers = this.getListaCervejas();
 
     return beers.find((beer: any) => beer.id === id);
+  }
+
+  getTotalCervejas() {
+    const beers = this.getListaCervejas();
+
+    return beers.length;
+  }
+
+  excluirCerveja(id: number) {
+    let beers = this.getListaCervejas();
+
+    let beerIndex = beers.findIndex((beer: any) => beer.id === id);
+
+    beers.splice(beerIndex, 1);
+
+    localStorage.setItem('beers', JSON.stringify(beers));
+
+    this.router.navigate(['/beerlist']);
   }
 }

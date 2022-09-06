@@ -8,7 +8,7 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class HeaderComponent implements OnInit {
   @Input() isLoggedIn!: boolean;
-  @Input() loggedInEmail!: string | null;
+  @Input() nomeCompleto!: string | null;
 
   constructor(private loginService: LoginService) { }
 
