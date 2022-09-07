@@ -1,6 +1,9 @@
+import { Usuario } from './../model/usuario';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { Subject, Observable, throwError } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +11,13 @@ import { Subject } from 'rxjs';
 export class LoginService {
   private isLogged = new Subject<boolean>();
 
-  constructor(private router: Router) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router) { }
+
+    httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+    };
 
   getLoginState(){
     return this.isLogged;
@@ -23,6 +32,10 @@ export class LoginService {
     if(user != null) {
       return user;
     }
+  }
+
+  getListaUsuariosWS() : Promise<Usuario[]> {
+    return this.http.get<any>('http://localhost:3000/users', this.httpOptions).toPromise();
   }
 
   getListaUsuarios() {

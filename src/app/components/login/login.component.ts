@@ -21,10 +21,22 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.email = '';
     this.senha = '';
+    this.listaUsuarios();
   }
 
   efetuarLogin() {
     this.loginService.fazerLogin(this.email, this.senha)
     this.form.reset();
+  }
+
+  listaUsuarios() {
+    this.loginService
+      .getListaUsuariosWS()
+      .then((usuarios) => {
+        alert(usuarios[0].nomeCompleto);
+      })
+      .catch((e) => {
+        alert('Deu bosta');
+      });
   }
 }
