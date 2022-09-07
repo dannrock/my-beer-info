@@ -1,3 +1,4 @@
+import { Usuario } from './../../model/usuario';
 import { LoginService } from 'src/app/services/login.service';
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -12,13 +13,7 @@ import { NgForm } from '@angular/forms';
 export class RegistrationComponent implements OnInit {
   @ViewChild('form') form!: NgForm;
 
-  user = {
-    nomeCompleto: null,
-    email: null,
-    senha: null,
-    isLoggedIn: false
-  }
-
+  user!: Usuario;
   confirmarSenha!: any;
 
   constructor(
@@ -28,11 +23,16 @@ export class RegistrationComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.user = new Usuario();
     this.confirmarSenha = '';
   }
 
-  cadastrarUsuario() {
+  cadastrarUsuarioWS() {
     this.user.isLoggedIn = true;
-    this.loginService.cadastrarUsuario(this.user);
+    this.loginService
+      .cadastrarUsuarioWS(this.user)
+      .catch((e) => {
+        alert('Erro em cadastrarUsuarioWS (Registration)');
+    });;
   }
 }

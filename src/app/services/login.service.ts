@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject, Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -23,68 +22,60 @@ export class LoginService {
     return this.isLogged;
   }
 
-  getUsuarioLogado() {
-    let usuarios = this.getListaUsuarios();
-
-    let user = usuarios.find((user: any) =>
-      user.isLoggedIn === true);
-
-    if(user != null) {
-      return user;
-    }
+  getUsuarioLogadoWS() : Promise<Usuario> {
+    return this.http
+        .get<any>(`http://localhost:3000/users?isLoggedIn=${true}`, this.httpOptions)
+        .toPromise()
+        .then((users: Usuario[]) => users[0]);
   }
 
   getListaUsuariosWS() : Promise<Usuario[]> {
     return this.http.get<any>('http://localhost:3000/users', this.httpOptions).toPromise();
   }
 
-  getListaUsuarios() {
-    let usuarios = JSON.parse(localStorage.getItem('usuarios') as string);
-
-    if(usuarios === null) {
-      usuarios = [];
-    }
-    return usuarios;
-  }
-
-  cadastrarUsuario(user: any) {
-    let usuarios = this.getListaUsuarios();
-    usuarios.push(user)
-    localStorage.setItem('usuarios', JSON.stringify(usuarios));
+  cadastrarUsuarioWS(usuario: Usuario) : Promise<Usuario> {
+    let retorno = this.http
+      .post<any>('http://localhost:3000/users', JSON.stringify(usuario), this.httpOptions)
+      .toPromise();
 
     this.isLogged.next(true);
     this.router.navigate(['/beersummary']);
+
+    return retorno;
   }
 
-  fazerLogin(email: string, senha: string) {
-    let usuarios = this.getListaUsuarios();
+  fazerLoginWS(email: string, senha: string) {
+    this.getListaUsuariosWS()
+    .then((usuarios : Usuario[]) =>{
+      let usuario = usuarios.find(us =>
+        us.email === email &&
+        us.senha === senha)
 
-    let userIndex = usuarios.findIndex((user: any) =>
-      user.email === email &&
-      user.senha === senha);
+      if(usuario !== undefined) {
+        usuario.isLoggedIn = true;
 
-    if(userIndex !== -1) {
-      usuarios[userIndex].isLoggedIn = true;
-      localStorage.setItem('usuarios', JSON.stringify(usuarios));
-      this.isLogged.next(true);
+        this.http
+          .put<Usuario>(`http://localhost:3000/users/${usuario.id}`, JSON.stringify(usuario), this.httpOptions)
+          .toPromise();
 
-      this.router.navigate(['/beersummary']);
-    }
+        this.isLogged.next(true);
+        this.router.navigate(['/beersummary']);
+      }
+    });
   }
 
-  fazerLogout() {
-    let usuarios = this.getListaUsuarios();
+  fazerLogoutWS() {
+    this.getUsuarioLogadoWS()
+      .then((usuario: Usuario) => {
+        usuario.isLoggedIn = false;
 
-    let userIndex = usuarios.findIndex((user: any) =>
-      user.isLoggedIn === true);
+        this.http
+          .put<Usuario>(`http://localhost:3000/users/${usuario.id}`, JSON.stringify(usuario), this.httpOptions)
+          .toPromise();
 
-    if(userIndex !== -1) {
-      usuarios[userIndex].isLoggedIn = false;
-      localStorage.setItem('usuarios', JSON.stringify(usuarios));
-      this.isLogged.next(false);
-
-      this.router.navigate(['']);
-    }
+        this.isLogged.next(false);
+        this.router.navigate(['']);
+    })
   }
 
 }

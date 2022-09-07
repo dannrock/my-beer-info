@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    this.loginService.fazerLogout();
+    this.loginService.fazerLogoutWS();
   }
 
 }

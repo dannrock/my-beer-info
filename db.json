@@ -8,18 +8,11 @@
       "isLoggedIn": false
     },
     {
-      "id": 2,
-      "nomeCompleto": "Lory Carre",
-      "email": "lory@dan.org",
-      "senha": "abc123",
-      "isLoggedIn": false
-    },
-    {
-      "id": 3,
-      "nomeCompleto": "Priscila Carre",
-      "email": "pri@dan.org",
-      "senha": "abc123",
-      "isLoggedIn": false
+      "id": 767,
+      "isLoggedIn": false,
+      "nomeCompleto": "Priscila Carregan",
+      "email": "pri@pri.net",
+      "senha": "abc321"
     }
   ],
   "beers": [
