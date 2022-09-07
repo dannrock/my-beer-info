@@ -2,17 +2,10 @@
   "users": [
     {
       "id": 1,
-      "nomeCompleto": "Danilo Rocha",
-      "email": "dan@dan.org",
+      "nomeCompleto": "Usuario Teste",
+      "email": "teste@teste.org",
       "senha": "abc123",
       "isLoggedIn": false
-    },
-    {
-      "id": 767,
-      "isLoggedIn": false,
-      "nomeCompleto": "Priscila Carregan",
-      "email": "pri@pri.net",
-      "senha": "abc321"
     }
   ],
   "beers": [
