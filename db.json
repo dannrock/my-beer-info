@@ -1,0 +1,28 @@
+{
+  "accounts": [
+    {
+      "id": 1,
+      "type": "teste1",
+      "accountNumber": "1234-x",
+      "balance": 100
+    },
+    {
+      "id": 2,
+      "type": "teste2",
+      "accountNumber": "2345-x",
+      "balance": 200
+    },
+    {
+      "id": 3,
+      "type": "teste3",
+      "accountNumber": "3456-x",
+      "balance": 300
+    },
+    {
+      "id": 4,
+      "type": "teste4",
+      "accountNumber": "4567-x",
+      "balance": 500
+    }
+  ]
+}
