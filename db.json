@@ -1,28 +1,49 @@
 {
-  "accounts": [
+  "users": [
     {
       "id": 1,
-      "type": "teste1",
-      "accountNumber": "1234-x",
-      "balance": 100
+      "nomeCompleto": "Danilo Rocha",
+      "email": "dan@dan.org",
+      "senha": "abc123",
+      "isLoggedIn": false
     },
     {
       "id": 2,
-      "type": "teste2",
-      "accountNumber": "2345-x",
-      "balance": 200
+      "nomeCompleto": "Lory Carre",
+      "email": "lory@dan.org",
+      "senha": "abc123",
+      "isLoggedIn": false
     },
     {
       "id": 3,
-      "type": "teste3",
-      "accountNumber": "3456-x",
-      "balance": 300
+      "nomeCompleto": "Priscila Carre",
+      "email": "pri@dan.org",
+      "senha": "abc123",
+      "isLoggedIn": false
+    }
+  ],
+  "beers": [
+    {
+      "id": 1,
+      "fabricante": "Femsa",
+      "marca": "Heineken",
+      "familia": "American Lager",
+      "tipo": "Lager",
+      "teor": "3",
+      "ibu": "2",
+      "cor": "Clara",
+      "userId": 1
     },
     {
-      "id": 4,
-      "type": "teste4",
-      "accountNumber": "4567-x",
-      "balance": 500
+      "id": 2,
+      "fabricante": "Ambev",
+      "marca": "Colorado",
+      "familia": "IPA",
+      "tipo": "IPA",
+      "teor": "6",
+      "ibu": "11",
+      "cor": "Clara",
+      "userId": 1
     }
   ]
 }
