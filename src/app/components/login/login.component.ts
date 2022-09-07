@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   }
 
   efetuarLogin() {
-    this.loginService.fazerLogin(this.email, this.senha)
+    this.loginService.fazerLoginWS(this.email, this.senha)
     this.form.reset();
   }
 }

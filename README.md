@@ -17,8 +17,8 @@ https://www.figma.com/file/w5Og1aaDiAz44rJA2dwV5z/MyBeerInfo?node-id=8%3A107
  - [x] Passar dados entre componentes que representam diferentes telas via parâmetros de rotas.
  - [x] Validar campos do formulário com REGEX e apresentar os erros.
  - [x] Desabilitar o botão de submit enquanto o formulário está inválido.
- - [ ] Fazer requisições a API com tratamento da resposta com Promises ou Observables.
- - [ ] Cadastrar uma entidade no JSON Server.
+ - [x] Fazer requisições a API com tratamento da resposta com Promises ou Observables.
+ - [x] Cadastrar uma entidade no JSON Server.
  - [x] Apresentar uma lista de dados com a diretiva estrutural ngFor.
  - [x] Usar a diretiva ngIf
  - [ ] Formatar a apresentação de dados com Pipes.

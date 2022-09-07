@@ -1,6 +1,6 @@
-import { Subject } from 'rxjs';
 import { LoginService } from './services/login.service';
 import { Component, OnInit } from '@angular/core';
+import { Usuario } from './model/usuario';
 
 @Component({
   selector: 'app-root',
@@ -25,9 +25,9 @@ export class AppComponent implements OnInit {
 
   getUsuarioLogado() {
     if(this.isLoggedIn) {
-      let user = this.loginService.getUsuarioLogado();
-
-      this.nomeCompleto = user.nomeCompleto;
+      this.loginService.getUsuarioLogadoWS()
+        .then((usuario: Usuario) => this.nomeCompleto = usuario.nomeCompleto)
+        .catch((e) => alert('Erro ao obter o usuário logado'));
     }
   }
 
