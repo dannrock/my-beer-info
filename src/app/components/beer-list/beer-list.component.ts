@@ -1,3 +1,4 @@
+import { Cerveja } from './../../model/cerveja';
 import { BeerService } from './../../services/beer.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
@@ -8,7 +9,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
   encapsulation: ViewEncapsulation.None
 })
 export class BeerListComponent implements OnInit {
-  beers!: any[];
+  beers!: Cerveja[];
 
   constructor(private beerService: BeerService) { }
 
@@ -17,7 +18,10 @@ export class BeerListComponent implements OnInit {
   }
 
   getListaCerveja() {
-    this.beers = this.beerService.getListaCervejas();
+    this.beerService
+      .getListaCervejas()
+      .subscribe((beers: Cerveja[]) => {
+        this.beers = beers;
+      })
   }
-
 }

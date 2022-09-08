@@ -1,3 +1,6 @@
+import { count, Observable } from 'rxjs';
+import { Cerveja } from './../model/cerveja';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -7,46 +10,31 @@ import { Router } from '@angular/router';
 export class BeerService {
 
   constructor(
-    private router: Router) { }
+    private http: HttpClient,
+    private router: Router
+    ) { }
 
-  getListaCervejas() {
-    let beers = JSON.parse(localStorage.getItem('beers') as string);
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+   };
 
-    if(beers === null) {
-      beers = [];
-    }
-    return beers;
+  getListaCervejas(): Observable<Cerveja[]> {
+    return this.http
+      .get<Cerveja[]>('http://localhost:3000/beers', this.httpOptions)
   }
 
-  registrarCerveja(beer: any) {
-    let beers = this.getListaCervejas();
-
-    beers.push(beer);
-
-    localStorage.setItem('beers', JSON.stringify(beers));
+  registrarCerveja(beer: Cerveja): Observable<Cerveja> {
+    return this.http
+      .post<Cerveja>('http://localhost:3000/beers', JSON.stringify(beer), this.httpOptions);
   }
 
-  getCerveja(id: number) {
-    const beers = this.getListaCervejas();
-
-    return beers.find((beer: any) => beer.id === id);
+  getCerveja(id: number): Observable<Cerveja> {
+    return this.http
+      .get<Cerveja>(`http://localhost:3000/beers/${id}`, this.httpOptions);
   }
 
-  getTotalCervejas() {
-    const beers = this.getListaCervejas();
-
-    return beers.length;
-  }
-
-  excluirCerveja(id: number) {
-    let beers = this.getListaCervejas();
-
-    let beerIndex = beers.findIndex((beer: any) => beer.id === id);
-
-    beers.splice(beerIndex, 1);
-
-    localStorage.setItem('beers', JSON.stringify(beers));
-
-    this.router.navigate(['/beerlist']);
+  excluirCerveja(id: number): Observable<Cerveja> {
+    return this.http
+      .delete<Cerveja>(`http://localhost:3000/beers/${id}`, this.httpOptions);
   }
 }

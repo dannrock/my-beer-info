@@ -15,7 +15,7 @@ export class LoginService {
     private router: Router) { }
 
     httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
 
   getLoginState(){

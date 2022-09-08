@@ -7,9 +7,11 @@ export class Cerveja {
   teor!: number;
   ibu!: number;
   cor!: string;
+  qtdEstrelas: string;
 
   constructor() {
     this.id = Math.round(Math.random() * 1000);
+    this.qtdEstrelas = "1";
   }
 
 }
