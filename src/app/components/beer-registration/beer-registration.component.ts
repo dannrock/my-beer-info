@@ -20,7 +20,8 @@ export class BeerRegistrationComponent implements OnInit {
     tipo: null,
     teor: null,
     ibu: null,
-    cor: null
+    cor: null,
+    qtdEstrelas: "1"
   }
 
   constructor(

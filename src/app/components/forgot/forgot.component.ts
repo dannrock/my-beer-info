@@ -1,3 +1,4 @@
+import { LoginService } from 'src/app/services/login.service';
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -14,6 +15,7 @@ export class ForgotComponent implements OnInit {
   email!: any;
 
   constructor(
+    private loginService: LoginService,
     private router: Router
   ) { }
 
@@ -22,10 +24,7 @@ export class ForgotComponent implements OnInit {
   }
 
   recuperarSenha() {
-    alert('Enviamos um e-mail com o link para recuperação da senha!')
+    this.loginService.recuperarSenha(this.email);
     this.form.reset();
-    this.email = '';
-    this.router.navigate(['/']);
   }
-
 }

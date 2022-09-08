@@ -143,6 +143,24 @@
           O campo Cor não pode ser vazio!
         </div>
       </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <select
+              id="qtdEstrelas"
+              name="qtdEstrelas"
+              [(ngModel)]="this.beer.qtdEstrelas"
+              #qtdEstrelas="ngModel"
+              style="display: block;"
+              class="validate">
+            <option value="1">1 estrela</option>
+            <option value="2">2 estrelas</option>
+            <option value="3">3 estrelas</option>
+            <option value="4">4 estrelas</option>
+            <option value="5">5 estrelas</option>
+          </select>
+        </div>
+      </div>
       <!--Fim campos visiveis-->
 
       <br />

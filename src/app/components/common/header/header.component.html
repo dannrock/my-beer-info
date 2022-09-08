@@ -4,7 +4,7 @@
     <ul id="nav-mobile" class="right hide-on-med-and-down">
       <!--Habilitado apenas quando logado-->
       <ng-container *ngIf="isLoggedIn">
-        <li>Bem-vindo(a) {{ nomeCompleto }} !</li>
+        <li>Bem-vindo(a) {{ nomeCompleto | titlecase }} !</li>
         <li><a routerLink="/beersummary">Resumo</a></li>
         <li><a routerLink="/beerlist">Lista</a></li>
         <li><a routerLink="/beerregister">Cadastro</a></li>

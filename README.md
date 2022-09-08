@@ -21,5 +21,5 @@ https://www.figma.com/file/w5Og1aaDiAz44rJA2dwV5z/MyBeerInfo?node-id=8%3A107
  - [x] Cadastrar uma entidade no JSON Server.
  - [x] Apresentar uma lista de dados com a diretiva estrutural ngFor.
  - [x] Usar a diretiva ngIf
- - [ ] Formatar a apresentação de dados com Pipes.
- - [ ] Build e deploy da aplicação.
+ - [x] Formatar a apresentação de dados com Pipes.
+ - [x] Build e deploy da aplicação.
