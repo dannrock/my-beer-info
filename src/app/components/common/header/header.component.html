@@ -1,0 +1,15 @@
+<nav>
+  <div class="nav-wrapper">
+    <a href="#" class="brand-logo">My Beer Info</a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <!--Habilitado apenas quando logado-->
+      <ng-container *ngIf="isLoggedIn">
+        <li>Bem-vindo(a) {{ nomeCompleto | titlecase }} !</li>
+        <li><a routerLink="/beersummary">Resumo</a></li>
+        <li><a routerLink="/beerlist">Lista</a></li>
+        <li><a routerLink="/beerregister">Cadastro</a></li>
+        <li><a (click)="logout()"><b>Sair</b></a></li>
+      </ng-container>
+    </ul>
+  </div>
+</nav>

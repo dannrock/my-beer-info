@@ -1,0 +1,93 @@
+<div class="container center">
+  <br />
+  <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 0px 40px 12px 40px; border: 1px solid #EEE;">
+
+    <form #form="ngForm" (ngSubmit)="cadastrarUsuarioWS()" class="col s12" method="post">
+      <div class='row'>
+        <div class='col s12'>
+        </div>
+      </div>
+
+      <div class='row'>
+        <div class='input-field col s12'>
+          <input
+              id='input-nome-completo'
+              name='input-nome-completo'
+              type='text'
+              class='validate'
+              [(ngModel)]="this.user.nomeCompleto"
+              pattern="^[a-zA-Z0-9_@#\\&\\$ ]{4,200}$"
+              #inputnome="ngModel"
+              placeholder="Digite seu Nome"
+              required />
+        </div>
+        <div class="red-text" style="font-size: small;" [hidden]="inputnome.valid || inputnome.pristine">
+          Nome inválido!
+        </div>
+      </div>
+
+      <div class='row'>
+        <div class='input-field col s12'>
+          <input
+              id='input-email'
+              name='input-email'
+              type='email'
+              class='validate'
+              [(ngModel)]="this.user.email"
+              pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+              #inputemail="ngModel"
+              placeholder="Digite seu Email"
+              required />
+        </div>
+        <div class="red-text" style="font-size: small;" [hidden]="inputemail.valid || inputemail.pristine">
+          E-mail inválido!
+        </div>
+      </div>
+
+      <div class='row'>
+        <div class='input-field col s12'>
+          <input
+              id='input-senha'
+              name='input-senha'
+              type='password'
+              class='validate'
+              [(ngModel)]="this.user.senha"
+              pattern="^[a-zA-Z0-9_@#\\&\\$]{6,18}$"
+              #inputsenha="ngModel"
+              placeholder="Digite sua senha"
+              required />
+        </div>
+        <div class="red-text" style="font-size: small;" [hidden]="inputsenha.valid || inputsenha.pristine">
+          Senha inválida! (Min. 6 caracteres)
+        </div>
+      </div>
+
+      <div class='row'>
+        <div class='input-field col s12'>
+          <input
+              id='input-confirma-senha'
+              name='input-confirma-senha'
+              type='password'
+              class='validate'
+              [(ngModel)]="this.confirmarSenha"
+              pattern="{{ inputsenha.value }}"
+              #inputconfirmasenha="ngModel"
+              placeholder="Confirme sua senha"
+              required />
+        </div><div class="red-text" style="font-size: small;" [hidden]="inputconfirmasenha.valid || inputconfirmasenha.pristine">
+          As senhas digitadas não conferem!
+        </div>
+      </div>
+
+        <div class='row'>
+          <button
+            type='submit'
+            name='btn-register'
+            class='col s12 btn btn-large waves-effect indigo'
+            [disabled]="!form.valid">
+            Registrar
+          </button>
+        </div>
+    </form>
+  </div>
+</div>

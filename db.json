@@ -1,0 +1,12 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "nomeCompleto": "Usuario Teste",
+      "email": "teste@teste.org",
+      "senha": "abc123",
+      "isLoggedIn": true
+    }
+  ],
+  "beers": []
+}

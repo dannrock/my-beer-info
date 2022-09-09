@@ -1,0 +1,193 @@
+<div class="container center">
+  <br />
+  <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 0px 40px 12px 40px; border: 1px solid #EEE;width: 75%;">
+
+    <form #form="ngForm" (ngSubmit)="salvar()" class="col s12" method="post">
+      <div class='row'>
+        <div class='col s12'>
+        </div>
+      </div>
+
+      <div class='row'>
+        <div class='input-field col s12'>
+          <input [(ngModel)]="beer.id"
+            disabled
+            hidden
+            type='text'
+            name='id'
+            id='id'/>
+        </div>
+      </div>
+
+      <!--Começo campos visiveis-->
+      <div class='row'>
+        <div class='input-field col s12'>
+          <input
+              id='input-fabricante'
+              name='input-fabricante'
+              type='text'
+              class='validate'
+              [(ngModel)]="this.beer.fabricante"
+              pattern="^[a-zA-Z0-9_@#\\&\\$ ]{4,200}$"
+              #inputfabricante="ngModel"
+              placeholder="Digite o Fabricante"
+              required />
+        </div>
+        <div class="red-text" style="font-size: small;" [hidden]="inputfabricante.valid || inputfabricante.pristine">
+          O campo Fabricante não pode ser vazio!
+        </div>
+      </div>
+
+      <div class='row'>
+        <div class='input-field col s12'>
+          <input
+              id='input-marca'
+              name='input-marca'
+              type='text'
+              class='validate'
+              [(ngModel)]="this.beer.marca"
+              pattern="^[a-zA-Z0-9_@#\\&\\$ ]{4,200}$"
+              #inputmarca="ngModel"
+              placeholder="Digite a Marca"
+              required />
+        </div>
+        <div class="red-text" style="font-size: small;" [hidden]="inputmarca.valid || inputmarca.pristine">
+          O campo Marca não pode ser vazio!
+        </div>
+      </div>
+
+      <div class='row'>
+        <div class='input-field col s12'>
+          <input
+              id='input-familia'
+              name='input-familia'
+              type='text'
+              class='validate'
+              [(ngModel)]="this.beer.familia"
+              pattern="^[a-zA-Z0-9_@#\\&\\$ ]{4,200}$"
+              #inputfamilia="ngModel"
+              placeholder="Digite a Família"
+              required />
+        </div>
+        <div class="red-text" style="font-size: small;" [hidden]="inputfamilia.valid || inputfamilia.pristine">
+          O campo família não pode ser vazio!
+        </div>
+      </div>
+
+      <div class='row'>
+        <div class='input-field col s12'>
+          <input
+              id='input-tipo'
+              name='input-tipo'
+              type='text'
+              class='validate'
+              [(ngModel)]="this.beer.tipo"
+              pattern="^[a-zA-Z0-9_@#\\&\\$ ]{4,200}$"
+              #inputtipo="ngModel"
+              placeholder="Digite o Tipo"
+              required />
+        </div>
+        <div class="red-text" style="font-size: small;" [hidden]="inputtipo.valid || inputtipo.pristine">
+          O campo Tipo não pode ser vazio!
+        </div>
+      </div>
+
+      <div class='row'>
+        <div class='input-field col s12'>
+          <input
+              id='input-teor'
+              name='input-teor'
+              type='number'
+              class='validate'
+              [(ngModel)]="this.beer.teor"
+              #inputteor="ngModel"
+              placeholder="Digite o Teor Alcoólico"
+              required />
+        </div>
+        <div class="red-text" style="font-size: small;" [hidden]="inputteor.valid || inputteor.pristine">
+          O campo Teor Alcoólico está inválido! (Apenas números)
+        </div>
+      </div>
+
+      <div class='row'>
+        <div class='input-field col s12'>
+          <input
+              id='input-ibu'
+              name='input-ibu'
+              type='number'
+              class='validate'
+              [(ngModel)]="this.beer.ibu"
+              #inputibu="ngModel"
+              placeholder="Digite o IBU"
+              required />
+        </div>
+        <div class="red-text" style="font-size: small;" [hidden]="inputibu.valid || inputibu.pristine">
+          O campo IBU está inválido! (Apenas números)
+        </div>
+      </div>
+
+      <div class='row'>
+        <div class='input-field col s12'>
+          <input
+              id='input-cor'
+              name='input-cor'
+              type='text'
+              class='validate'
+              [(ngModel)]="this.beer.cor"
+              pattern="^[a-zA-Z0-9_@#\\&\\$ ]{4,200}$"
+              #inputcor="ngModel"
+              placeholder="Digite a Cor"
+              required />
+        </div>
+        <div class="red-text" style="font-size: small;" [hidden]="inputcor.valid || inputcor.pristine">
+          O campo Cor não pode ser vazio!
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <select
+              id="qtdEstrelas"
+              name="qtdEstrelas"
+              [(ngModel)]="this.beer.qtdEstrelas"
+              #qtdEstrelas="ngModel"
+              style="display: block;"
+              class="validate">
+            <option value="1">1 estrela</option>
+            <option value="2">2 estrelas</option>
+            <option value="3">3 estrelas</option>
+            <option value="4">4 estrelas</option>
+            <option value="5">5 estrelas</option>
+          </select>
+        </div>
+      </div>
+      <!--Fim campos visiveis-->
+
+      <br />
+        <div class='row'>
+          <button
+            type='submit'
+            name='btn-salvar'
+            class='col s4 btn btn-large waves-effect green'
+            [disabled]="!form.valid" >
+            Salvar
+          </button>
+
+          <button (click)="excluir()"
+            type='button'
+            name='btn-excluir'
+            class='col s4 btn btn-large waves-effect red'
+            [disabled]="!form.valid" >
+            Excluir
+          </button>
+
+          <button (click)="cancelar()"
+            type='button'
+            name='btn-cancelar'
+            class='col s4 btn btn-large waves-effect grey'>
+            Cancelar
+          </button>
+        </div>
+    </form>
+  </div>
+</div>

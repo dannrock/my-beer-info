@@ -1,0 +1,8 @@
+{
+  "/users/:id": "/users/:id",
+  "/users": "/users",
+  "/users/isLoggedIn/:boolean": "/users?isLoggedIn=boolean",
+
+  "/beers": "/beers",
+  "/beers/beer/:id": "/beers/:id"
+}
