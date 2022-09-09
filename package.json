@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod --base-href=/my-beer-info/",
+    "build": "ng build --base-href=/my-beer-info/",
     "ghpages": "angular-cli-ghpages --dir=dist/my-beer-info",
     "deploy": "npm run build & npm run ghpages",
     "watch": "ng build --watch --configuration development",
