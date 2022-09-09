@@ -5,7 +5,7 @@
       "nomeCompleto": "Usuario Teste",
       "email": "teste@teste.org",
       "senha": "abc123",
-      "isLoggedIn": false
+      "isLoggedIn": true
     }
   ],
   "beers": []

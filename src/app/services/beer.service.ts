@@ -1,4 +1,4 @@
-import { count, Observable } from 'rxjs';
+import { count, Observable, of } from 'rxjs';
 import { Cerveja } from './../model/cerveja';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -26,6 +26,10 @@ export class BeerService {
   registrarCerveja(beer: Cerveja): Observable<Cerveja> {
     return this.http
       .post<Cerveja>('http://localhost:3000/beers', JSON.stringify(beer), this.httpOptions);
+  }
+  atualizarCerveja(beer: Cerveja): Observable<Cerveja> {
+    return this.http
+      .put<Cerveja>(`http://localhost:3000/beers/${beer.id}`, JSON.stringify(beer), this.httpOptions);
   }
 
   getCerveja(id: number): Observable<Cerveja> {

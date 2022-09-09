@@ -26,9 +26,18 @@ export class BeerRegistrationComponent implements OnInit {
   }
 
   salvar() {
-    this.beerService
-      .registrarCerveja(this.beer)
-      .subscribe();
+    const id = this.route.snapshot.queryParams['id'];
+
+    if(id === undefined) {
+      this.beerService
+        .registrarCerveja(this.beer)
+        .subscribe();
+    }
+    else {
+      this.beerService
+        .atualizarCerveja(this.beer)
+        .subscribe();
+    }
 
     this.router.navigate(['/beerlist']);
   }
