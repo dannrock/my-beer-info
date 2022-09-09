@@ -15,7 +15,7 @@ export class LoginService {
     private router: Router) { }
 
     httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
 
   getLoginState(){
@@ -78,4 +78,14 @@ export class LoginService {
     })
   }
 
+  recuperarSenha(email: string) {
+    //Metodo apenas para ter um exemplo de LocalStorage
+    localStorage.setItem('email-recuperacao', JSON.stringify(email));
+
+    let emailRecuperado = JSON.parse(localStorage.getItem('email-recuperacao') as string);
+
+    alert(`Email enviado para \"${emailRecuperado}\" com o link de recuperação!`)
+
+    this.router.navigate(['']);
+  }
 }

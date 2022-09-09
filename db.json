@@ -5,31 +5,8 @@
       "nomeCompleto": "Usuario Teste",
       "email": "teste@teste.org",
       "senha": "abc123",
-      "isLoggedIn": false
+      "isLoggedIn": true
     }
   ],
-  "beers": [
-    {
-      "id": 1,
-      "fabricante": "Femsa",
-      "marca": "Heineken",
-      "familia": "American Lager",
-      "tipo": "Lager",
-      "teor": "3",
-      "ibu": "2",
-      "cor": "Clara",
-      "userId": 1
-    },
-    {
-      "id": 2,
-      "fabricante": "Ambev",
-      "marca": "Colorado",
-      "familia": "IPA",
-      "tipo": "IPA",
-      "teor": "6",
-      "ibu": "11",
-      "cor": "Clara",
-      "userId": 1
-    }
-  ]
+  "beers": []
 }

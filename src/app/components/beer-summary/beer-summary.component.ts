@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Cerveja } from 'src/app/model/cerveja';
 import { BeerService } from 'src/app/services/beer.service';
 
 @Component({
@@ -19,7 +20,10 @@ export class BeerSummaryComponent implements OnInit {
   }
 
   getTotalCervejas() {
-    this.qtdCervejas = this.beerService.getTotalCervejas();
+    this.beerService
+      .getListaCervejas()
+      .subscribe((beers: Cerveja[]) => {
+        this.qtdCervejas = beers.length;
+      })
   }
-
 }

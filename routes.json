@@ -4,5 +4,5 @@
   "/users/isLoggedIn/:boolean": "/users?isLoggedIn=boolean",
 
   "/beers": "/beers",
-  "/beers/beer/:id": "/beers/beer/:id"
+  "/beers/beer/:id": "/beers/:id"
 }
