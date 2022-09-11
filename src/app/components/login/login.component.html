@@ -1,7 +1,17 @@
 <div class="container center">
   <br />
-  <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 0px 40px 12px 40px; border: 1px solid #EEE;">
 
+  <div class="row">
+    <div class="col s12">
+      <div
+        *ngIf="this.mensagemRetorno"
+        id="msg-login"
+        class="card-panel red white-text">
+        {{ this.mensagemRetorno }}
+      </div>
+  </div>
+
+  <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 0px 40px 12px 40px; border: 1px solid #EEE;">
     <form #form="ngForm" (ngSubmit)="efetuarLogin()" class="col s12" method="post">
       <div class='row'>
         <div class='col s12'>
