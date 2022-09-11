@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
 
   email!: any;
   senha!: any;
+  mensagemRetorno!: string;
 
   constructor(
     private loginService: LoginService
@@ -24,7 +25,12 @@ export class LoginComponent implements OnInit {
   }
 
   efetuarLogin() {
-    this.loginService.fazerLoginWS(this.email, this.senha)
+    this.loginService
+      .fazerLoginWS(this.email, this.senha)
+      .catch(e => {
+        this.mensagemRetorno = e;
+      })
+
     this.form.reset();
   }
 }

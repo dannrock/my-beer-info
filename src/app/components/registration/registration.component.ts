@@ -31,8 +31,8 @@ export class RegistrationComponent implements OnInit {
     this.user.isLoggedIn = true;
     this.loginService
       .cadastrarUsuarioWS(this.user)
-      .catch((e) => {
-        alert('Erro em cadastrarUsuarioWS (Registration)');
+      .catch(() => {
+        alert('registration.cadastrarUsuarioWS: Erro ao fazer cadastrar usuário');
     });;
   }
 }

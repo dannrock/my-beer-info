@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
     if(this.isLoggedIn) {
       this.loginService.getUsuarioLogadoWS()
         .then((usuario: Usuario) => this.nomeCompleto = usuario.nomeCompleto)
-        .catch((e) => alert('Erro ao obter o usuário logado'));
+        .catch(() => alert('app.getUsuarioLogado: Erro ao obter usuário logado'));
     }
   }
 

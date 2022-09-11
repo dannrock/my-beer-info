@@ -1,5 +1,5 @@
 import { Usuario } from './../model/usuario';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject, Observable, throwError } from 'rxjs';
@@ -23,59 +23,102 @@ export class LoginService {
   }
 
   getUsuarioLogadoWS() : Promise<Usuario> {
-    return this.http
-        .get<any>(`http://localhost:3000/users?isLoggedIn=${true}`, this.httpOptions)
+    let promise = new Promise<Usuario>((resolve, reject) => {
+      this.http
+        .get<Usuario[]>(`http://localhost:3000/users?isLoggedIn=${true}`, this.httpOptions)
         .toPromise()
-        .then((users: Usuario[]) => users[0]);
+        .then(usuarios => resolve(usuarios![0]!))
+        .catch(erro => reject('Atenção: Serviço fora do ar! (Json Server iniciado?)'));
+    });
+
+    return promise;
   }
 
   getListaUsuariosWS() : Promise<Usuario[]> {
-    return this.http.get<any>('http://localhost:3000/users', this.httpOptions).toPromise();
+    let promise = new Promise<Usuario[]>((resolve, reject) => {
+      this.http.get<Usuario[]>('http://localhost:3000/users', this.httpOptions)
+        .toPromise()
+        .then(usuarios => resolve(usuarios!))
+        .catch(erro => reject('Atenção: Serviço fora do ar! (Json Server iniciado?)'))
+    });
+
+    return promise;
   }
 
   cadastrarUsuarioWS(usuario: Usuario) : Promise<Usuario> {
-    let retorno = this.http
-      .post<any>('http://localhost:3000/users', JSON.stringify(usuario), this.httpOptions)
-      .toPromise();
+    let promise = new Promise<Usuario>((resolve, reject) => {
+      this.http
+        .post<Usuario>('http://localhost:3000/users', JSON.stringify(usuario), this.httpOptions)
+        .toPromise()
+        .then(usuario => {
+          this.isLogged.next(true);
+          this.router.navigate(['/beersummary']);
 
-    this.isLogged.next(true);
-    this.router.navigate(['/beersummary']);
-
-    return retorno;
-  }
-
-  fazerLoginWS(email: string, senha: string) {
-    this.getListaUsuariosWS()
-    .then((usuarios : Usuario[]) =>{
-      let usuario = usuarios.find(us =>
-        us.email === email &&
-        us.senha === senha)
-
-      if(usuario !== undefined) {
-        usuario.isLoggedIn = true;
-
-        this.http
-          .put<Usuario>(`http://localhost:3000/users/${usuario.id}`, JSON.stringify(usuario), this.httpOptions)
-          .toPromise();
-
-        this.isLogged.next(true);
-        this.router.navigate(['/beersummary']);
-      }
+          resolve(usuario!);
+        })
+        .catch(erro => reject('Atenção: Serviço fora do ar! (Json Server iniciado?)'));
     });
+
+    return promise;
   }
 
-  fazerLogoutWS() {
-    this.getUsuarioLogadoWS()
-      .then((usuario: Usuario) => {
-        usuario.isLoggedIn = false;
+  atualizarUsuarioWS(usuario: Usuario): Promise<Usuario> {
+    let promise = new Promise<Usuario>((resolve, reject) => {
+      this.http
+        .put<Usuario>(`http://localhost:3000/users/${usuario.id}`, JSON.stringify(usuario), this.httpOptions)
+        .toPromise()
+        .then(usuario => resolve(usuario!))
+        .catch(erro => reject('Atenção: Serviço fora do ar! (Json Server iniciado?)'));
+    });
 
-        this.http
-          .put<Usuario>(`http://localhost:3000/users/${usuario.id}`, JSON.stringify(usuario), this.httpOptions)
-          .toPromise();
+    return promise;
+  }
 
-        this.isLogged.next(false);
-        this.router.navigate(['']);
-    })
+  fazerLoginWS(email: string, senha: string) : Promise<Usuario> {
+    let promise = new Promise<Usuario>((resolve, reject) => {
+      this.getListaUsuariosWS()
+        .then(
+          (usuarios) => {
+            let usuario = usuarios.find(us =>
+              us.email === email &&
+              us.senha === senha)
+
+            if(usuario !== undefined) {
+              usuario!.isLoggedIn = true;
+              this.atualizarUsuarioWS(usuario!);
+
+              this.isLogged.next(true);
+              this.router.navigate(['/beersummary']);
+
+              resolve(usuario!);
+            }
+            else {
+              reject('Atenção: Usuário não encontrado!')
+            }
+          },
+          () => {
+            reject('Atenção: Serviço fora do ar! (Json Server iniciado?)')
+        })
+    });
+
+    return promise;
+  }
+
+  fazerLogoutWS(): Promise<Usuario> {
+    let promise = new Promise<Usuario>((resolve, reject) => {
+      this.getUsuarioLogadoWS()
+        .then((usuario) => {
+          usuario.isLoggedIn = false;
+          this.atualizarUsuarioWS(usuario!);
+
+          this.isLogged.next(false);
+          this.router.navigate(['']);
+
+          resolve(usuario!);
+        })
+        .catch(erro => reject('Atenção: Serviço fora do ar! (Json Server iniciado?)'));
+      });
+    return promise;
   }
 
   recuperarSenha(email: string) {

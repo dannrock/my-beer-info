@@ -16,7 +16,8 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    this.loginService.fazerLogoutWS();
+    this.loginService.fazerLogoutWS()
+    .catch(() => alert('header.logout: Erro ao fazer logout'));
   }
 
 }
